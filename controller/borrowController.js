@@ -18,7 +18,7 @@ const borrowBook = asyncHandler(async (req, res) => {
         }
     } else {
         res.status(400);
-        throw new Error("Book is out of stock");
+        throw new Error("Sorry, the book is out of stock");
     }
 })
 
@@ -47,10 +47,11 @@ const borrowHistory = asyncHandler(async (req, res) => {
     try {
         const userId = req.body.userId
         const borrow = await Borrow.find({ userId })
-        if(borrow.length>0){
-        res.status(200).json({
-            borrow
-        });}else{
+        if (borrow.length > 0) {
+            res.status(200).json({
+                borrow
+            });
+        } else {
             res.status(200).json({
                 message: "You have no history with us. Please start reading"
             });
@@ -60,10 +61,24 @@ const borrowHistory = asyncHandler(async (req, res) => {
     }
 })
 
+const mostBorrowed = asyncHandler(async (req, res) => {
+    console.log("most popular book");
+})
+
+const activeMembers = asyncHandler(async (req, res) => {
+    console.log("most active members");
+})
+
+const availableBooks = asyncHandler(async (req, res) => {
+    console.log("available books");
+})
 
 
 module.exports = {
     borrowBook,
     returnBook,
-    borrowHistory
+    borrowHistory,
+    mostBorrowed,
+    activeMembers,
+    availableBooks
 }

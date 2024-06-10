@@ -9,10 +9,7 @@ const login = asyncHandler(async (req, res) => {
         if (await admin.matchPassword(password)) {                   //checks if the passwords match
             generateToken(res, admin._id);                                     //generates jwt token
             res.status(201).json({
-                _id: admin._id,
-                name: admin.name,
-                email: admin.email,
-                role:admin.role
+                message:"Admin has successfully logged in"
             });
         } else {
             res.status(400)
