@@ -4,14 +4,15 @@ const generateToken = require("../util/jwToken.js")
 
 const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const user = await Admin.findOne({ email, role: "admin" });                    //checks if the user exists
-    if (user) {
-        if (await user.matchPassword(password)) {                   //checks if the passwords match
-            generateToken(res, user._id);                                     //generates jwt token
+    const admin = await Admin.findOne({ email, role: "admin" });                    //checks if the user exists
+    if (admin) {
+        if (await admin.matchPassword(password)) {                   //checks if the passwords match
+            generateToken(res, admin._id);                                     //generates jwt token
             res.status(201).json({
-                _id: user._id,
-                name: user.name,
-                email: user.email,
+                _id: admin._id,
+                name: admin.name,
+                email: admin.email,
+                role:admin.role
             });
         } else {
             res.status(400)
@@ -28,7 +29,7 @@ const logout = asyncHandler(async (req, res) => {
         httpOnly: true,
         expires: new Date(0),
     });
-    res.status(200).json({ message: "User Logged Out" });
+    res.status(200).json({ message: "Admin Logged Out" });
 });
 
 
