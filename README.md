@@ -10,7 +10,7 @@
 
 ## Description
 
-The Nalanda Library Management app is a web application built with Node.js. It facilitates the management of all library matters, including borrowing and book management.
+The Nalanda Library Management app is a web application built with Node.js. It manages the library, like borrowing and book management.
 
 ## Features
 
@@ -43,7 +43,7 @@ Explore the available features, including appointment scheduling and profile man
 
 ## API Documentation
 For detailed API documentation, refer to API Documentation:
-[https://docs.google.com/document/d/18_Px3QPXmzk1uBWcah_7sgNUIRc4EntD/edit?usp=drive_link&ouid=104231152089645088920&rtpof=true&sd=true](url)
+https://docs.google.com/document/d/1UvVOUADPQLHc6GUdK1gjPVHZ2NHBc1UX/edit?usp=drive_link&ouid=112482183188147475380&rtpof=true&sd=true
 
 
 
