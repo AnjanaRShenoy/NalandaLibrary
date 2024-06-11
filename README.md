@@ -49,3 +49,4 @@ https://docs.google.com/document/d/1UvVOUADPQLHc6GUdK1gjPVHZ2NHBc1UX/edit?usp=dr
 
 Project Link of github (https://github.com/AnjanaRShenoy/NalandaLibrary.git)
 Project Link of bitBucket (git clone https://shenoyanjana96@bitbucket.org/nalanda_library/nalandalibrary.git)
+MongoDB connection string (mongodb+srv://shenoyanjana96:N1Jmz3Z32zpYpcCq@nalanda.qfpdnad.mongodb.net/nalanda)
