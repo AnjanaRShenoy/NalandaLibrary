@@ -2,47 +2,56 @@ const asyncHandler = require("express-async-handler");
 const Book = require("../model/bookModel.js")
 
 const addBook = asyncHandler(async (req, res) => {
-    const { title, author, ISBN, publicationDate, genre, numberOfCopies } = req.body
-    const newBook = await Book.create({
-        title,
-        author,
-        ISBN,
-        publicationDate,
-        genre,
-        numberOfCopies
-    })
-    res.status(201).json({
-        message: "Book has been entered"
-    });
+    try {
+        const { title, author, ISBN, publicationDate, genre, numberOfCopies } = req.body
+        const newBook = await Book.create({
+            title,
+            author,
+            ISBN,
+            publicationDate,
+            genre,
+            numberOfCopies
+        })
+        res.status(201).json({
+            message: "Book has been created"
+        });
+    } catch (err) {
+        console.log(err);
+    }
+
 })
 
 const updateBook = asyncHandler(async (req, res) => {
+    try {
+        const book = await Book.findById(req.body._id)
+        if (book) {
+            book.title = req.body.title || book.title
+            book.author = req.body.author || book.author
+            book.ISBN = req.body.ISBN || book.ISBN
+            book.publicationDate = req.body.publicationDate || book.publicationDate
+            book.genre = req.body.genre || book.genre
+            book.numberOfCopies = req.body.numberOfCopies || book.numberOfCopies
 
-    const book = await Book.findById(req.body._id)
-    if (book) {
-        book.title = req.body.title || book.title
-        book.author = req.body.author || book.author
-        book.ISBN = req.body.ISBN || book.ISBN
-        book.publicationDate = req.body.publicationDate || book.publicationDate
-        book.genre = req.body.genre || book.genre
-        book.numberOfCopies = req.body.numberOfCopies || book.numberOfCopies
+            const updatedBook = await book.save()
+            res.status(200).json({
+                _id: updatedBook._id,
+                title: updatedBook.title,
+                author: updatedBook.author,
+                ISBN: updatedBook.ISBN,
+                publicationDate: updatedBook.publicationDate,
+                genre: updatedBook.genre,
+                numberOfCopies: updatedBook.numberOfCopies,
+                message: "Book has been updated"
+            })
 
-        const updatedBook = await book.save()
-        res.status(200).json({
-            _id: updatedBook._id,
-            title: updatedBook.title,
-            author: updatedBook.author,
-            ISBN: updatedBook.ISBN,
-            publicationDate: updatedBook.publicationDate,
-            genre: updatedBook.genre,
-            numberOfCopies: updatedBook.numberOfCopies,
-            message: "Book has been updated"
-        })
-
-    } else {
-        res.status(404)
-        throw new Error('Book Not Found')
+        } else {
+            res.status(404)
+            throw new Error('Book Not Found')
+        }
+    } catch (err) {
+        console.log(err);
     }
+
 })
 
 const deleteBook = asyncHandler(async (req, res) => {
@@ -60,13 +69,13 @@ const deleteBook = asyncHandler(async (req, res) => {
     }
 })
 
-const listBooks= asyncHandler(async(req,res)=>{
-    try{
+const listBooks = asyncHandler(async (req, res) => {
+    try {
         const book = await Book.find()
-        res.status(201).json({       
-            book         
+        res.status(201).json({
+            book
         });
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
 })
