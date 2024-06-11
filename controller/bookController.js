@@ -18,7 +18,6 @@ const addBook = asyncHandler(async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-
 })
 
 const updateBook = asyncHandler(async (req, res) => {
