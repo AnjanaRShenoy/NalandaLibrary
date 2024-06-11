@@ -29,7 +29,7 @@ const borrowBook = asyncHandler(async (req, res) => {
 
 const returnBook = asyncHandler(async (req, res) => {
     try {
-        const borrowId = req.body.borrowId
+        const borrowId = req.body.bookId
         const borrow = await Borrow.findById(borrowId)
         if (borrow) {
             borrow.returnDate = Date.now();
@@ -57,7 +57,7 @@ const borrowHistory = asyncHandler(async (req, res) => {
                 borrow
             });
         } else {
-            res.status(200).json({
+            res.status(400).json({
                 message: "You have no history with us. Please start reading"
             });
         }
@@ -101,7 +101,7 @@ const mostBorrowed = asyncHandler(async (req, res) => {
                 mostBorrowed
             });
         } else {
-            res.status(200).json({
+            res.status(400).json({
                 message: "No such a book."
             });
         }
@@ -145,7 +145,7 @@ const activeMembers = asyncHandler(async (req, res) => {
                 mostActive
             });
         } else {
-            res.status(200).json({
+            res.status(400).json({
                 message: "No such a person."
             });
         }
@@ -181,9 +181,16 @@ const availableBooks = asyncHandler(async (req, res) => {
                 }
             }
         ]);
-        res.status(200).json({
-            booksAvailable
-        });
+        if (booksAvailable) {
+            res.status(200).json({
+                booksAvailable
+            });
+        } else {
+            res.status(400).json({
+                message:"No books available"
+            });
+        }
+
     } catch (err) {
         console.log(err);
     }
