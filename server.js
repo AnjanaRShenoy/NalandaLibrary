@@ -13,7 +13,7 @@ const dotenv = require('dotenv').config();
 const port = process.env.PORT;
 connectDB();
 
-// Place cookie-parser middleware before your routes
+
 app.use(cookieParser());
 
 app.use("/api/user", userRouter);
